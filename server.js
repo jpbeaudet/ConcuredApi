@@ -70,7 +70,7 @@ router.get('/', function(req, res) {
 
 // ALL SITES AND LOGO / PROJECT NAME
 router.route('/audit/projects/:project_id') 
-//get all projects (accessed at GET http://localhost:3000/api/audit/projetcs)
+//get all projects (accessed at GET http://localhost:3000/api/audit/projects/:project_id)
 	.get(function(req, res) {
 	Project.findOne({"project_name": req.params.project_id }, function(err, sites) {
 		if (err)
@@ -118,8 +118,8 @@ router.route('/audit/TopTopicsPerSite/:site_id')
 });
 
 // SOCIAL ATTRIBUTES / TOPICS
-router.route('/audit/SocialAtrributePerTopics/:topic_id')
-// get the topic by name (accessed at GET http://localhost:3000/api/audit/sites/:site_id)
+router.route('/audit/SocialAttributePerTopics/:topic_id')
+// Get social attribute per topic (accessed at GET http://localhost:3000/api/audit/SocialAttributePerTopics/:topic_id)
 .get(function(req, res) {
 	var topic = req.params.topic_id.replace(/%20/g," ")
 	Topic.findOne({"topic": topic }, function(err, topic) {
