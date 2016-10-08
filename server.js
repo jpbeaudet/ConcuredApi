@@ -61,6 +61,9 @@ router.get('/', function(req, res) {
 	Project.find(function(err, projects) {
 		if (err)
 			res.send(err);
+		res.header('Access-Control-Allow-Origin', '*')
+		res.header('Access-Control-Allow-Methods', 'GET')
+		res.statusCode = 200;
 		res.json({ status:"success", message: 'ConcuredApi is active !', projects: projects });
 	});
 });
@@ -78,6 +81,9 @@ router.route('/audit/projects/:project_id')
 		response = {}
 		response.status = "success"
 		response.sites = sites
+		res.header('Access-Control-Allow-Origin', '*')
+		res.header('Access-Control-Allow-Methods', 'GET')
+		res.statusCode = 200;
 		res.json(response);
 	});
 });
@@ -92,6 +98,9 @@ router.route('/audit/sites/:site_id')
 		response = {}
 		response.status = "success"
 		response.site = site
+		res.header('Access-Control-Allow-Origin', '*')
+		res.header('Access-Control-Allow-Methods', 'GET')
+		res.statusCode = 200;
 		res.json(response);
     });
 });
@@ -113,6 +122,9 @@ router.route('/audit/TopTopicsPerSite/:site_id')
 			response["TopTopics"].push({"topic":topic[x].subject+" "+topic[x].object, "cscore": topic[x].cscore.CSCORE, "rank":x+1 })
 		}
 		response.status = "success"
+		res.header('Access-Control-Allow-Origin', '*')
+		res.header('Access-Control-Allow-Methods', 'GET')
+		res.statusCode = 200;
 		res.json(response);
 	});
 });
@@ -129,6 +141,9 @@ router.route('/audit/SocialAttributePerTopics/:topic_id')
 		response.status = "success"
 		response.twitter = topic.twitter_count
 		// add other social share counts here
+		res.header('Access-Control-Allow-Origin', '*')
+		res.header('Access-Control-Allow-Methods', 'GET')
+		res.statusCode = 200;
 		res.json(response);
 	});
 });
@@ -144,6 +159,9 @@ router.route('/audit/TopicDataPerName/:topic_id')
 		response = {}
 		response.status = "success"
 		response.topic = topic
+		res.header('Access-Control-Allow-Origin', '*')
+		res.header('Access-Control-Allow-Methods', 'GET')
+		res.statusCode = 200;
 		res.json(response);
 	});
 });
@@ -159,6 +177,9 @@ router.route('/audit/TopicDatapPerDatePerName/:topic_id')
 		response = {}
 		response.status = "success"
 		response.topic = topic
+		res.header('Access-Control-Allow-Origin', '*')
+		res.header('Access-Control-Allow-Methods', 'GET')
+		res.statusCode = 200;
 		res.json(response);
 	});
 });
