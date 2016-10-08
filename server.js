@@ -108,9 +108,9 @@ router.route('/audit/TopTopicsPerSite/:site_id')
 		if (err)
 			res.send(err);
 		response = {"TopTopics":[]}
-		for (var x = 0; x <= nb; x++) { 
+		for (var x = 0; x < nb; x++) { 
 			// replace with topic[x].topic when figure out what is wrong
-			response["TopTopics"].push({"topic":topic[x].subject+" "+topic[x].object, "cscore": topic[x].cscore.CSCORE })
+			response["TopTopics"].push({"topic":topic[x].subject+" "+topic[x].object, "cscore": topic[x].cscore.CSCORE, "rank":x+1 })
 		}
 		response.status = "success"
 		res.json(response);

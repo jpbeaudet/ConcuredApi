@@ -32,27 +32,85 @@ node server.js
 ----
 
 #### Test the server:
+Request:
  
 	GET http://localhost:3000/api
 
-#### Get the topic by name:
+Sucess Response:
+
+	{ 
+		status:"success",
+		message: 'ConcuredApi is active !', 
+		projects: projects list
+	}
+
+### Audit Section:
+
+#### Get  site by ID:
 site_id must be the mongo match a site _id
+Request:
 
 	GET http://localhost:3000/api/audit/sites/:site_id
 
+Success Response:
+
+	{ 
+		status:"success",
+		site: site data
+	}
+
 #### get top topics by site 
 Expect a number query string parameters (?number=number)
+Request:
 
 	GET http://localhost:3000/api/audit/TopTopicsPerSite/:site_id?number=number
 
-#### Get social attribute per topic
+Success Response:
+
+	{ 
+		status:"success",
+		TopTopics: {
+			[
+			topic: topic,
+			cscore: cscore,
+			rank: rank
+			]
+		}
+	}
+
+#### Get social attribute per topic ( work in prgress , will add ither social attributes attributes)
+Request:
 
 	GET http://localhost:3000/api/audit/SocialAttributePerTopics/:topic_id
 
+Success Response:
+
+	{ 
+		status:"success",
+		twitter: twitter shares count
+	}
+
 #### Get the topic data by name:
+Request:
 
 	GET http://localhost:3000/api/audit/TopicDataPerName/:topic_id
 
+Success Response:
+
+	{ 
+		status:"success",
+		topic: topic data
+	}
+
 #### Get data per date and by name: (work in progress)
+Request:
 
 	GET http://localhost:3000/api/audit/TopicDatapPerDatePerName/:topic_id
+
+#### Error response:
+
+	{
+		status: "error",
+		message: error message,
+		error: stacktrace
+	}
