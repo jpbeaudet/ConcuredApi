@@ -64,7 +64,7 @@ router.get('/', function(req, res) {
 		res.header('Access-Control-Allow-Origin', '*')
 		res.header('Access-Control-Allow-Methods', 'GET')
 		res.statusCode = 200;
-		res.json({ status:"success", message: 'ConcuredApi is active !', projects: projects });
+		res.json({ success: true, message: 'ConcuredApi is active !', projects: projects });
 	});
 });
 
@@ -79,7 +79,7 @@ router.route('/audit/projects/:project_id')
 		if (err)
 			res.send(err);
 		response = {}
-		response.status = "success"
+		response.success = true
 		response.sites = sites
 		res.header('Access-Control-Allow-Origin', '*')
 		res.header('Access-Control-Allow-Methods', 'GET')
@@ -96,7 +96,7 @@ router.route('/audit/sites/:site_id')
 		if (err)
 			res.send(err);
 		response = {}
-		response.status = "success"
+		response.success = true
 		response.site = site
 		res.header('Access-Control-Allow-Origin', '*')
 		res.header('Access-Control-Allow-Methods', 'GET')
@@ -121,7 +121,7 @@ router.route('/audit/TopTopicsPerSite/:site_id')
 			// replace with topic[x].topic when figure out what is wrong
 			response["TopTopics"].push({"topic":topic[x].subject+" "+topic[x].object, "cscore": topic[x].cscore.CSCORE, "rank":x+1 })
 		}
-		response.status = "success"
+		response.success = true
 		res.header('Access-Control-Allow-Origin', '*')
 		res.header('Access-Control-Allow-Methods', 'GET')
 		res.statusCode = 200;
@@ -138,7 +138,7 @@ router.route('/audit/SocialAttributePerTopics/:topic_id')
 		if (err)
 			res.send(err);
 		response = {}
-		response.status = "success"
+		response.success = true
 		response.twitter = topic.twitter_count
 		// add other social share counts here
 		res.header('Access-Control-Allow-Origin', '*')
@@ -157,7 +157,7 @@ router.route('/audit/TopicDataPerName/:topic_id')
 		if (err)
 			res.send(err);
 		response = {}
-		response.status = "success"
+		response.success = true
 		response.topic = topic
 		res.header('Access-Control-Allow-Origin', '*')
 		res.header('Access-Control-Allow-Methods', 'GET')
@@ -175,7 +175,7 @@ router.route('/audit/TopicDatapPerDatePerName/:topic_id')
 		if (err)
 			res.send(err);
 		response = {}
-		response.status = "success"
+		response.success = true
 		response.topic = topic
 		res.header('Access-Control-Allow-Origin', '*')
 		res.header('Access-Control-Allow-Methods', 'GET')
@@ -205,7 +205,7 @@ if (app.get('env') === 'development') {
 	app.use(function(err, req, res, next) {
 		res.status(err.status || 500);
 		res.json({
-			status: "error",
+			success: false,
 			message: err.message,
 			error: err
 		});
@@ -217,7 +217,7 @@ if (app.get('env') === 'development') {
 app.use(function(err, req, res, next) {
 	res.status(err.status || 500);
 	res.json({
-		status: "error",
+		success: false,
 		message: err.message,
 		error: {}
 	});

@@ -39,7 +39,7 @@ Request:
 Sucess Response:
 
 	{ 
-		status:"success",
+		success: true,
 		message: 'ConcuredApi is active !', 
 		projects: projects list
 	}
@@ -55,7 +55,7 @@ Request:
 Success Response:
 
 	{ 
-		status:"success",
+		success: true,
 		site: site data
 	}
 
@@ -68,7 +68,7 @@ Request:
 Success Response:
 
 	{ 
-		status:"success",
+		success: true,
 		TopTopics: {
 			[
 			topic: topic,
@@ -86,7 +86,7 @@ Request:
 Success Response:
 
 	{ 
-		status:"success",
+		success: true,
 		twitter: twitter shares count
 	}
 
@@ -98,7 +98,7 @@ Request:
 Success Response:
 
 	{ 
-		status:"success",
+		success: true,
 		topic: topic data
 	}
 
@@ -110,7 +110,7 @@ Request:
 #### Error response:
 
 	{
-		status: "error",
+		success: false,
 		message: error message,
 		error: stacktrace
 	}
