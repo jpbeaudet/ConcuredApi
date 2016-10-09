@@ -92,15 +92,15 @@ router.route('/audit/sites/:site_id')
     });
 });
 
-// TOP TOPICS / SITES (number=number of entries)
+// V2 TOP TOPICS / SITES (number=number of entries)
 router.route('/audit/TopTopicsPerSite/:site_id')
 // expect a ?number=number of entries 
 // get the topic by name (accessed at GET http://localhost:3000/api/audit/TopTopicsPerSite/:site_id)
 .get(function(req, res) {
 	var nb = Number(req.query.number) || 20
 	var url = req.params.site_id .replace(/_/g,"/")
-	// replace twitter count with CSCORE this is for tes purpose
-	Topic.find({"site_url": url }).sort({ "twitter_count" : -1}).exec(function(err, topic) {
+	// replace twitter count with CSCORE when spyfu is back 
+	Topic.find({"site_url": url },{ "subject":1,"object":1,"cscore.CSCORE":1}).sort({ "cscore.CSCORE" : -1}).exec(function(err, topic) {
 		if (err)
 			res.send(err);
 		response = {"TopTopics":[]}
@@ -114,6 +114,7 @@ router.route('/audit/TopTopicsPerSite/:site_id')
 		res.statusCode = 200;
 		res.json(response);
 	});
+	
 });
 
 // SOCIAL ATTRIBUTES / TOPICS
