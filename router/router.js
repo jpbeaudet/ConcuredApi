@@ -12,7 +12,7 @@
 // =============================================================================
 
 var config = require('../config'); // get our config file
-
+	
 module.exports = function (app, router) {
 	
 // setup mongodb
@@ -98,15 +98,17 @@ router.route('/audit/TopTopicsPerSite/:site_id')
 // get the topic by name (accessed at GET http://localhost:3000/api/audit/TopTopicsPerSite/:site_id)
 .get(function(req, res) {
 	var nb = Number(req.query.number) || 20
+	var id = req.params.site_id 
 	var url = req.params.site_id .replace(/_/g,"/")
-	// replace twitter count with CSCORE when spyfu is back 
 	Topic.find({"site_url": url },{ "subject":1,"object":1,"cscore.CSCORE":1}).sort({ "cscore.CSCORE" : -1}).exec(function(err, topic) {
 		if (err)
 			res.send(err);
-		response = {"TopTopics":[]}
+		response = {"order":id,"TopTopics":[]}
 		for (var x = 0; x < nb; x++) { 
+			if(topic[x] != undefined && topic[x] != null && topic[x].subject != undefined && topic[x].subject != null){ 
 			// replace with topic[x].topic when figure out what is wrong
 			response["TopTopics"].push({"topic":topic[x].subject+" "+topic[x].object, "cscore": topic[x].cscore.CSCORE, "rank":x+1 })
+		}
 		}
 		response.success = true
 		res.header('Access-Control-Allow-Origin', '*')
