@@ -101,14 +101,13 @@ router.route('/audit/TopTopicsPerSite/:site_id')
 	var id = req.params.site_id 
 	var order = Number(req.query.order)
 	var url = req.params.site_id .replace(/_/g,"/")
-	Topic.find({"site_url": url },{ "subject":1,"object":1,"cscore.CSCORE":1}).sort({ "cscore.CSCORE" : -1}).exec(function(err, topic) {
+	Topic.find({"site_url": url },{ "topic":1,"cscore.CSCORE":1}).sort({ "cscore.CSCORE" : -1}).exec(function(err, topic) {
 		if (err)
 			res.send(err);
 		response = {"order":order,"id":id,"TopTopics":[]}
 		for (var x = 0; x < nb; x++) { 
-			if(topic[x] != undefined && topic[x] != null && topic[x].subject != undefined && topic[x].subject != null){ 
-			// replace with topic[x].topic when figure out what is wrong
-			response["TopTopics"].push({"topic":topic[x].subject+" "+topic[x].object, "cscore": topic[x].cscore.CSCORE, "rank":x+1 })
+			if(topic[x] != undefined && topic[x] != null && topic[x].topic != undefined && topic[x].topic != null){ 
+			response["TopTopics"].push({"topic":topic[x].topic, "cscore": topic[x].cscore.CSCORE, "rank":x+1 })
 		}
 		}
 		response.success = true

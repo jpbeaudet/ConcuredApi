@@ -3,7 +3,7 @@ var Schema = mongoose.Schema;
 
 var Topic = new Schema({
 
-	topic_id: String,
+	topic: String,
 	object: String,
 	obj_concepts: Array,
 	subject: String,
