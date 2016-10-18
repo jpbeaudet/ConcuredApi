@@ -23,8 +23,14 @@ var Topic = new Schema({
 	},
 	twitter_count: Number,
 	cscore: {
-		CSCORE: Number
+		CSCORE: Number,
+		twitter_count: Number,
 	},
+    social_shares : {
+        google_plus : Number,
+        facebook : Number,
+        linked_in : Number
+    },
 	page_url: String
 	
 });

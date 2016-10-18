@@ -101,13 +101,13 @@ router.route('/audit/TopTopicsPerSite/:site_id')
 	var id = req.params.site_id 
 	var order = Number(req.query.order)
 	var url = req.params.site_id .replace(/_/g,"/")
-	Topic.find({"site_url": url },{ "topic":1,"cscore.CSCORE":1}).sort({ "cscore.CSCORE" : -1}).exec(function(err, topic) {
+	Topic.find({"site_url": url },{ "topic":1,"cscore.CSCORE":1,"cscore.twitter_count":1,"social_shares.facebook":1,"social_shares.google_plus":1,"social_shares.linked_in":1}).sort({ "cscore.CSCORE" : -1}).exec(function(err, topic) {
 		if (err)
 			res.send(err);
 		response = {"order":order,"id":id,"TopTopics":[]}
 		for (var x = 0; x < nb; x++) { 
 			if(topic[x] != undefined && topic[x] != null && topic[x].topic != undefined && topic[x].topic != null){ 
-			response["TopTopics"].push({"topic":topic[x].topic, "cscore": topic[x].cscore.CSCORE, "rank":x+1 })
+			response["TopTopics"].push({"topic":topic[x].topic, "cscore": topic[x].cscore.CSCORE, "rank":x+1, "twitter_count":topic[x].cscore.twitter_count,"google_plus":topic[x].social_shares.google_plus, "facebook":topic[x].social_shares.facebook, "linked_in":topic[x].social_shares.linked_in})
 		}
 		}
 		response.success = true
