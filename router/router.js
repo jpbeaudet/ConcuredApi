@@ -143,7 +143,7 @@ router.route('/audit/TopicDataPerName/:topic_id')
 // get the topic by name (accessed at GET http://localhost:3000/api/audit/TopicDataPerName/:topic_id)
 .get(function(req, res) {
 	var topic = req.params.topic_id.replace(/%20/g," ")
-	Topic.findOne(topic, function(err, topic) {
+	Topic.findOne({"topic": topic }, function(err, topic) {
 		if (err)
 			res.send(err);
 		response = {}
@@ -161,6 +161,7 @@ router.route('/audit/TopicDatapPerDatePerName/:topic_id')
 // get the topic by name (accessed at GET http://localhost:3000/api/audit/TopicDatapPerDatePerName/:topic_id)
 .get(function(req, res) {
 	var topic = req.params.topic_id.replace(/%20/g," ")
+
 	Topic.findOne(topic, function(err, topic) {
 		if (err)
 			res.send(err);
